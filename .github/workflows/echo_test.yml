@@ -15,4 +15,4 @@ jobs:
 
         steps:
         - name: Run echo command
-          run: echo ${{ fromJSON(inputs.FILES_CHANGED) }}
+          run: echo ${{ inputs.FILES_CHANGED }}
