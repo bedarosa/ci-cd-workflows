@@ -1,0 +1,41 @@
+name: Detect Changes
+
+on:
+    pull_request:
+        types:
+            - closed
+
+jobs:
+    label-pr:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+
+            - name: Configure GitHub Token
+              run: echo "GITHUB_TOKEN is set"
+              env:
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Verrificar arquivos modificados
+              run: |
+                git fetch origin main
+                changed_files=$(git diff --name-only origin/main)
+                echo "Arquivos modificados: $changed_files"
+
+                if echo "$changed_files" | grep "projeto_A/"; then
+                    echo "Projeto A foi alterado"
+                    curl -X POST -H "Authorization: token $GITHUB_TOKEN" \
+                        -H "Content-Type: application/json" \
+                        -d '{"labels":["projeto_A"]}' \
+                        "https://api.github.com/repos/{owner}/{repo}/issues/${{ github.event.pull_request.number }}/labels"
+                fi
+
+                if echo "$changed_files" | grep "projeto_B/"; then
+                    echo "Projeto B foi alterado"
+                    curl -X POST -H "Authorization: token $GITHUB_TOKEN" \
+                        -H "Content-Type: application/json" \
+                        -d '{"labels":["projeto_B"]}' \
+                        "https://api.github.com/repos/{owner}/{repo}/issues/${{ github.event.pull_request.number }}/labels"
+                fi
+
