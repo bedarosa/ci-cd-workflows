@@ -27,7 +27,7 @@ jobs:
                     echo "Project Dotnet.Results has been changed"
                     curl -X POST -H "Authorization: token $GITHUB_TOKEN" \
                         -H "Content-Type: application/json" \
-                        -d '{"labels":["projeto_A"]}' \
+                        -d '{"labels":["Dotnet.Results"]}' \
                         "https://api.github.com/repos/{owner}/{repo}/issues/${{ github.event.pull_request.number }}/labels"
                 fi
 
@@ -35,7 +35,7 @@ jobs:
                     echo "Project Dotnet.TestApp has been changed"
                     curl -X POST -H "Authorization: token $GITHUB_TOKEN" \
                         -H "Content-Type: application/json" \
-                        -d '{"labels":["projeto_B"]}' \
+                        -d '{"labels":["Dotnet.TestApp"]}' \
                         "https://api.github.com/repos/{owner}/{repo}/issues/${{ github.event.pull_request.number }}/labels"
                 fi
 
