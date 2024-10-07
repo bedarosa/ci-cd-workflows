@@ -1,0 +1,14 @@
+name: Release Workflow
+
+on:
+  push: 
+    branches:
+      - main
+        
+jobs:
+    find-diference:
+        uses: ./.github/workflows/detect_changes.yml
+
+    echo-test:
+        needs: [find-diference]
+        uses: ./.github/workflows/echo_test.yml
