@@ -1,9 +1,8 @@
 name: Detect Changes
 
+
 on:
-    pull_request:
-        types:
-            - closed
+    workflow_call:
 
 jobs:
     label-pr:
