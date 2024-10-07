@@ -19,8 +19,8 @@ jobs:
 
             - name: Verrificar arquivos modificados
               run: |
-                git fetch origin main
-                changed_files=$(git diff --name-only origin/main)
+                git fetch origin master
+                changed_files=$(git diff --name-only origin/master)
                 echo "Arquivos modificados: $changed_files"
 
                 if echo "$changed_files" | grep "Dotnet.Results/"; then
