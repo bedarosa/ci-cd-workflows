@@ -23,16 +23,16 @@ jobs:
                 changed_files=$(git diff --name-only origin/main)
                 echo "Arquivos modificados: $changed_files"
 
-                if echo "$changed_files" | grep "projeto_A/"; then
-                    echo "Projeto A foi alterado"
+                if echo "$changed_files" | grep "Dotnet.Results/"; then
+                    echo "Project Dotnet.Results has been changed"
                     curl -X POST -H "Authorization: token $GITHUB_TOKEN" \
                         -H "Content-Type: application/json" \
                         -d '{"labels":["projeto_A"]}' \
                         "https://api.github.com/repos/{owner}/{repo}/issues/${{ github.event.pull_request.number }}/labels"
                 fi
 
-                if echo "$changed_files" | grep "projeto_B/"; then
-                    echo "Projeto B foi alterado"
+                if echo "$changed_files" | grep "Dotnet.TestApp/"; then
+                    echo "Project Dotnet.TestApp has been changed"
                     curl -X POST -H "Authorization: token $GITHUB_TOKEN" \
                         -H "Content-Type: application/json" \
                         -d '{"labels":["projeto_B"]}' \
