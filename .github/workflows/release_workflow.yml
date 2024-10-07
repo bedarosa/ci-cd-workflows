@@ -12,3 +12,5 @@ jobs:
     echo-test:
         needs: [find-diference]
         uses: ./.github/workflows/echo_test.yml
+        with:
+          FILES_CHANGED: test
