@@ -8,34 +8,21 @@ on:
 jobs:
     label-pr:
         runs-on: ubuntu-latest
+        name: Test changed-files
         steps:
-            - name: Checkout code
-              uses: actions/checkout@v2
+        - uses: actions/checkout@v4
 
-            - name: Configure GitHub Token
-              run: echo "GITHUB_TOKEN is set"
-              env:
-                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        - name: Get changed files
+          id: changed-files
+          uses: tj-actions/changed-files@v45
+            # To compare changes between the current commit and the last pushed remote commit set `since_last_remote_commit: true`. e.g
+            # with:
+            #   since_last_remote_commit: true 
 
-            - name: Verrificar arquivos modificados
-              run: |
-                git fetch origin master
-                changed_files=$(git diff --name-only origin/master)
-                echo "Arquivos modificados: $changed_files"
-
-                if echo "$changed_files" | grep "Dotnet.Results/"; then
-                    echo "Project Dotnet.Results has been changed"
-                    curl -X POST -H "Authorization: token $GITHUB_TOKEN" \
-                        -H "Content-Type: application/json" \
-                        -d '{"labels":["Dotnet.Results"]}' \
-                        "https://api.github.com/repos/{owner}/{repo}/issues/${{ github.event.pull_request.number }}/labels"
-                fi
-
-                if echo "$changed_files" | grep "Dotnet.TestApp/"; then
-                    echo "Project Dotnet.TestApp has been changed"
-                    curl -X POST -H "Authorization: token $GITHUB_TOKEN" \
-                        -H "Content-Type: application/json" \
-                        -d '{"labels":["Dotnet.TestApp"]}' \
-                        "https://api.github.com/repos/{owner}/{repo}/issues/${{ github.event.pull_request.number }}/labels"
-                fi
-
+        - name: List all changed files
+          env:
+            ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
+          run: |
+            for file in ${ALL_CHANGED_FILES}; do
+                echo "$file was changed"
+            done
