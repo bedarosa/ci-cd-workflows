@@ -1,9 +1,9 @@
 name: Release Workflow
 
-on:
-  pull_request:
-    types:
-      - closed
+#on:
+ # pull_request:
+ #   types:
+ #     - closed
 
 jobs:
   find-difference:
@@ -14,5 +14,9 @@ jobs:
     needs: [find-difference]  # Garante que o echo-test só roda após find-difference
     uses: ./.github/workflows/echo_test.yml  # Chama o workflow echo_test
     with:
+<<<<<<< Updated upstream
       FILES_CHANGED: ${{ needs.find-difference.outputs.changed_files }}  # Usa o output de find-difference
+=======
+      FILES_CHANGED: ${{  }}  # Usa o output de find-difference
+>>>>>>> Stashed changes
     secrets: inherit
