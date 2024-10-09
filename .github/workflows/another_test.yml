@@ -16,7 +16,7 @@ jobs:
 
       Dotnet-TestApp:
         if: ${{ contains(github.event.pull_request.labels.*.name, 'Dotnet.TestApp') }}
-        uses: .github/workflows/build_html.yml@main
+        uses: ./.github/workflows/build_html.yml@main
         with: 
           PROJECT_TO_BUILD: Dotnet.TestApp
 
