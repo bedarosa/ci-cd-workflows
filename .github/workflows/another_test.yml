@@ -7,16 +7,13 @@ on:
 jobs:
       Dotnet-Results:
         if: ${{ contains(github.event.pull_request.labels.*.name, 'Dotnet.Results') }}
-        runs-on: ubuntu-latest
-      
-        steps:
-        - uses: actions/checkout@v2
-        - name: Run a one-line script
-          run: echo Hello, ${{ github.event.pull_request.labels.*.name }}
+        uses: ./.github/workflows/build_html.yml
+        with: 
+          PROJECT_TO_BUILD: Dotnet.Results
 
       Dotnet-TestApp:
         if: ${{ contains(github.event.pull_request.labels.*.name, 'Dotnet.TestApp') }}
-        uses: ./.github/workflows/build_html.yml@main
+        uses: ./.github/workflows/build_html.yml
         with: 
           PROJECT_TO_BUILD: Dotnet.TestApp
 
