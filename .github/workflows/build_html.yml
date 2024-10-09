@@ -1,0 +1,14 @@
+on:
+    workflow_call:
+        inputs:
+            PROJECT_TO_BUILD:
+                required: false
+                type: string
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: my-step
+              run: echo "Hello World! ${{ inputs.PROJECT_TO_BUILD }}"
