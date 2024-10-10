@@ -9,9 +9,6 @@ jobs:
     runs-on: "ubuntu-latest"
     steps:
     - uses: actions/checkout@v4
-      with:
-        repository: bedarosa/ci-cd-workflows
-        ref: master
         
     - name: Label 
       uses: actions/labeler@v5
