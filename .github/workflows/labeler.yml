@@ -1,7 +1,10 @@
 name: "(internal) Pull Request Labeler"
 run-name: "(internal) Pull Request Labeler"
+#on:
+#- pull_request_target
+
 on:
-- pull_request_target
+    workflow_call:
 
 jobs:
   labeler:
@@ -14,10 +17,3 @@ jobs:
     - uses: actions/labeler@v5
       with:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Wait for Labels to be Applied
-      run: sleep 5  # Aguarda 5 segundos
-        
-    - name: Execute Step if Label Present
-      if: contains(github.event.pull_request.labels.*.name, 'orbitdotnetresult')
-      run: echo "The PR has the specific label!"

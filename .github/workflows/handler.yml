@@ -1,0 +1,13 @@
+name: Release Candidate Workflow
+
+on:
+  pull_request: 
+  
+jobs:
+
+    labeled:
+        uses: ./.github/workflows/labeler.yml
+
+    check-labels:
+        needs: [labeled]
+        uses: ./.github/workflows/test_labels.yml
