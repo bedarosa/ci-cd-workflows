@@ -1,7 +1,12 @@
 name: Release Candidate Workflow
 
 on:
-  pull_request: 
+  pull_request:
+
+permissions:
+  contents: read
+  pull-requests: write  # Adicione a permissão necessária aqui
+
   
 jobs:
 
