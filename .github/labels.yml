@@ -1,0 +1,13 @@
+orbitdotnet:
+- changed-files:
+  - any-glob-to-any-file: Dotnet.TestApp
+
+orbitdotnetresult:
+- changed-files:
+  - any-glob-to-any-file: Dotnet.Results
+
+documentation:
+- changed-files:
+  - any-glob-to-any-file:
+    - '*.md'
+    - '.github/**/*.md'
