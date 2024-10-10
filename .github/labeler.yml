@@ -1,11 +1,8 @@
 dotnet.TestApp:
-- changed-files:
-  - 'Dotnet.Results/**/*'
+  - '**/Dotnet.Results/**/*'  # Arquivos que acionam o rótulo dotnet.TestApp
 
 dotnet.Results:
-- changed-files:
-  - 'Dotnet.TestApp/**/*'
+  - '**/Dotnet.TestApp/**/*'  # Arquivos que acionam o rótulo dotnet.Results
 
 documentation:
- - changed-files:
-   -  any-glob-to-any-file: ['**/*.md']
+  - '**/*.md'  # Qualquer arquivo Markdown que acionará o rótulo documentation

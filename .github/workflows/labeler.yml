@@ -2,7 +2,7 @@ name: "(internal) Pull Request Labeler"
 run-name: "(internal) Pull Request Labeler"
 on:
     pull_request:
-      types: [closed]
+      types: [opened, synchronize]
 
 jobs:
   labeler:
