@@ -10,8 +10,14 @@ jobs:
       pull-requests: write
     runs-on: "ubuntu-latest"
 
-    steps:        
+    steps:
     - uses: actions/labeler@v5
       with:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
         
+    - name: Check Labels
+      run: |
+        echo "Labels on the PR:"
+        for label in "${{ toJson(github.event.pull_request.labels) }}"; do
+        echo "${label.name}"
+        done
