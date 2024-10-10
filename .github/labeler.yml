@@ -1,7 +1,7 @@
-dotnet.TestApp:
+orbitdotnet:
   - '**/Dotnet.Results/**/*'  # Arquivos que acionam o rótulo dotnet.TestApp
 
-dotnet.Results:
+orbitdotnetresult:
   - '**/Dotnet.TestApp/**/*'  # Arquivos que acionam o rótulo dotnet.Results
 
 documentation:
