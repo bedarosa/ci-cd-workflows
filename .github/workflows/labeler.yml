@@ -1,0 +1,22 @@
+name: "(internal) Pull Request Labeler"
+run-name: "(internal) Pull Request Labeler"
+on:
+    push:
+        branches:
+        - master
+
+jobs:
+  labeler:
+    runs-on: "cawe-linux-x64-general-small"
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        repository: bedarosa/ci-cd-workflows
+        ref: main
+        
+    - name: Label 
+      uses: actions/labeler@v5
+      with:
+        configuration-path: '.github/labeler.yml'
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        sync-labels: true

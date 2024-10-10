@@ -17,12 +17,12 @@ jobs:
         with: 
           PROJECT_TO_BUILD: Dotnet.TestApp
 
-      doc:
-        if: ${{ contains(github.event.pull_request.labels.*.name, 'Doc') }}
-        uses: ./.github/workflows/build_html.yml
-        with: 
-          PROJECT_TO_BUILD: Dotnet.TestApp
+      # doc:
+      #   if: ${{ contains(github.event.pull_request.labels.*.name, 'Doc') }}
+      #   uses: ./.github/workflows/build_html.yml
+      #   with: 
+      #     PROJECT_TO_BUILD: Dotnet.TestApp
         
-      build:
-        needs: [dotnet-TestApp]
-        uses: ./.github/workflows/
+      # build:
+      #   needs: [dotnet-TestApp]
+      #   uses: ./.github/workflows/
