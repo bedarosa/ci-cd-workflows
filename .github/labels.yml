@@ -1,10 +1,10 @@
 orbitdotnet:
 - changed-files:
-  - any-glob-to-any-file: Dotnet.TestApp
+  - any-glob-to-any-file: 'Dotnet.TestApp/**/*'
 
 orbitdotnetresult:
 - changed-files:
-  - any-glob-to-any-file: Dotnet.Results
+  - any-glob-to-any-file: 'Dotnet.Results/**/*'
 
 documentation:
 - changed-files:
