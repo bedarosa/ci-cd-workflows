@@ -18,9 +18,6 @@ jobs:
     - name: Wait for Labels to be Applied
       run: sleep 5  # Aguarda 5 segundos
         
-    - name: Check Labels
-      run: |
-        echo "Labels on the PR:"
-        for label in "${{ github.event.pull_request.labels }}"; do
-            echo "${label.name}"
-        done
+    - name: Execute Step if Label Present
+      if: contains(github.event.pull_request.labels.*.name, 'orbitdotnetresult')
+      run: echo "The PR has the specific label!"
