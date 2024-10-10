@@ -21,8 +21,6 @@ jobs:
     - name: Check Labels
       run: |
         echo "Labels on the PR:"
-          for label in "${{ toJson(github.event.pull_request.labels) }}"; do
-            # Extrair o nome da label
-            label_name=$(echo "$label" | jq -r .name)
-            echo "$label_name"
-          done
+        for label in "${{ github.event.pull_request.labels }}"; do
+            echo "${label.name}"
+        done
