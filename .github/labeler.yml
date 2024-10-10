@@ -1,8 +1,8 @@
 orbitdotnet:
-  - '**/Dotnet.Results/**/*'  # Arquivos que acionam o rótulo dotnet.TestApp
+  - '**/Dotnet.Results/**/*'  # Arquivos que acionam o rótulo orbitdotnet
 
 orbitdotnetresult:
-  - '**/Dotnet.TestApp/**/*'  # Arquivos que acionam o rótulo dotnet.Results
+  - '**/Dotnet.TestApp/**/*'  # Arquivos que acionam o rótulo orbitdotnetresult
 
 documentation:
   - '**/*.md'  # Qualquer arquivo Markdown que acionará o rótulo documentation
