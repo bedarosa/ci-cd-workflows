@@ -8,5 +8,5 @@ jobs:
       - name: Check PR Labels
         run: |
           echo "Labels on the PR:"
-          run: echo "${{ toJSON(github.event.pull_request.labels.*.name) }}"
+          echo "${{ toJSON(github.event.pull_request.labels.*.name) }}"
 
