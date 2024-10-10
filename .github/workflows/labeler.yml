@@ -7,7 +7,7 @@ on:
 
 jobs:
   labeler:
-    runs-on: "cawe-linux-x64-general-small"
+    runs-on: "ubuntu-latest"
     steps:
     - uses: actions/checkout@v4
       with:
