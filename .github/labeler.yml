@@ -1,10 +1,10 @@
-OrbitDotnet:
+dotnet.TestApp:
 - changed-files:
-  - 'OrbitDotnet/**/*'
+  - 'Dotnet.Results/**/*'
 
-OrbitDotnet-Result:
+dotnet.Results:
 - changed-files:
-  - 'OrbitDotnet.Results/**/*'
+  - 'Dotnet.TestApp/**/*'
 
 documentation:
  - changed-files:
