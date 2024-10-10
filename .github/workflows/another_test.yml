@@ -5,16 +5,24 @@ on:
     types: [closed]
 
 jobs:
-      Dotnet-Results:
+      dotnet-Results:
         if: ${{ contains(github.event.pull_request.labels.*.name, 'Dotnet.Results') }}
         uses: ./.github/workflows/build_html.yml
         with: 
           PROJECT_TO_BUILD: Dotnet.Results
 
-      Dotnet-TestApp:
+      dotnet-TestApp:
         if: ${{ contains(github.event.pull_request.labels.*.name, 'Dotnet.TestApp') }}
         uses: ./.github/workflows/build_html.yml
         with: 
           PROJECT_TO_BUILD: Dotnet.TestApp
 
-
+      doc:
+        if: ${{ contains(github.event.pull_request.labels.*.name, 'Doc') }}
+        uses: ./.github/workflows/build_html.yml
+        with: 
+          PROJECT_TO_BUILD: Dotnet.TestApp
+        
+      build:
+        needs: [dotnet-TestApp]
+        uses: ./.github/workflows/

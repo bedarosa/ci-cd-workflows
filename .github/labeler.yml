@@ -1,0 +1,9 @@
+OrbitDotnet:
+  - 'OrbitDotnet/**/*'
+
+OrbitDotnet-Result:
+ - 'OrbitDotnet.Results/**/*'
+
+Documentation:
+ - changed-files:
+   -  any-glob-to-any-file: ['**/*.md']
