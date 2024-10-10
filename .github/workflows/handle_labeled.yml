@@ -1,0 +1,17 @@
+name: Handle Labeled PR
+
+on:
+  pull_request:
+    types: [labeled]  # Aciona quando uma label é adicionada a um PR
+
+jobs:
+  handle_label:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check PR Labels
+        run: |
+          echo "A label was added to the pull request:"
+          for label in "${{ toJson(github.event.pull_request.labels) }}"; do
+            label_name=$(echo "$label" | jq -r .name)
+            echo "$label_name"
+          done
