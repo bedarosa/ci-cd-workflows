@@ -1,9 +1,8 @@
 name: "(internal) Pull Request Labeler"
 run-name: "(internal) Pull Request Labeler"
 on:
-    push:
-        branches:
-        - master
+    pull_request:
+      types: [closed]
 
 jobs:
   labeler:
