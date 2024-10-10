@@ -7,8 +7,8 @@ jobs:
     steps:
       - name: Check PR Labels
         run: |
-          echo "A label was added to the pull request:"
+          echo "Labels on the PR:"
           for label in "${{ toJson(github.event.pull_request.labels) }}"; do
-            label_name=$(echo "$label" | jq -r .name)
-            echo "$label_name"
+            echo "${label.name}"
           done
+
