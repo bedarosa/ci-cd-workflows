@@ -4,7 +4,7 @@ run-name: "(internal) Pull Request Labeler"
 #- pull_request_target
 
 on:
-    workflow_call:
+    pull_request:
 
 jobs:
   labeler:
