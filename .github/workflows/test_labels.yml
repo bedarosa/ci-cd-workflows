@@ -8,5 +8,13 @@ jobs:
       - name: Check PR Labels
         id: set_output
         run: |
+<<<<<<< Updated upstream
           labels=$(echo '${{ toJSON(github.event.pull_request.labels) }}')
           echo "labels=$labels" >> $GITHUB_OUTPUT
+=======
+          echo "A label was added to the pull request:"
+          for label in "${{ toJson(github.event.pull_request.labels) }}"; do
+            label_name=$(echo "$label" | jq -r .name)
+            echo "$label_name" >> output.txt
+          done
+>>>>>>> Stashed changes
