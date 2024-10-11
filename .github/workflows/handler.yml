@@ -11,11 +11,20 @@ permissions:
   
 jobs:
 
-    labeled:
-        uses: ./.github/workflows/test_labels.yml
+    handle_label:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Check PR Labels
+          id: set_output
+          run: |
+            raw_labels="${{ toJSON(github.event.pull_request.labels) }}"
+            echo "Raw PR labels: $raw_labels"
+            
+            # Extrair os valores da propriedade name
+            echo "$raw_labels" | grep '"name"' | sed -E 's/.*"name": "(.*)".*/\1/'
 
     check-labels:
-        needs: labeled
+        needs: handle_label
         runs-on: ubuntu-latest
         steps:
           - name: Get Labels Output
