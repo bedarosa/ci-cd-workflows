@@ -20,4 +20,4 @@ jobs:
         steps:
           - name: Get Labels Output
             run: |
-                echo "Labels from the labeled job: ${{ needs.labeled.outputs.labels }}"
+                echo "Labels from the labeled job: ${{ needs.labeled.outputs.LABELS }}"
