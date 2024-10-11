@@ -11,24 +11,7 @@ jobs:
           raw_labels="${{ toJSON(github.event.pull_request.labels) }}"
           echo "Raw PR labels: $raw_labels"
           
-          # Garantir que o JSON esteja em um formato correto
-          if [[ "$raw_labels" == "null" || -z "$raw_labels" ]]; then
-            echo "No labels found"
-            echo "labels=[]" >> $GITHUB_OUTPUT
-            exit 0
-          fi
-
-          # Extrair os valores da propriedade name usando grep
-          names=$(echo "$raw_labels" | grep -oP '"name": "\K[^"]+')
-
-          # Verificar se foram encontrados nomes
-          if [ -z "$names" ]; then
-            echo "No names found"
-            echo "labels=[]" >> $GITHUB_OUTPUT
-            exit 0
-          fi
-
-          # Armazenar os nomes no formato desejado
-          echo "labels=[$(echo "$names" | tr '\n' ',' | sed 's/,$//')]" >> $GITHUB_OUTPUT
+          # Extrair os valores da propriedade name
+          names=$(echo "$raw_labels" | grep -oP '"name":\s*"\K[^"]+')
 
           
