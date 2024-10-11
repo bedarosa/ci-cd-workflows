@@ -13,5 +13,11 @@ jobs:
           
           # Extrair os valores da propriedade name
           echo "$raw_labels" | grep '"name"' | sed -E 's/.*"name": "(.*)".*/\1/'
+          # echo "Raw PR labels: $raw_labels" | grep '"name"' | sed -E 's/.*"name": "(.*)".*/\1/'
+            
+            # Extrair os valores da propriedade name
+            echo "$RAW_LABELS" | grep '"name"' | sed -E 's/.*"name": "(.*)".*/\1/'
+          
+
 
           

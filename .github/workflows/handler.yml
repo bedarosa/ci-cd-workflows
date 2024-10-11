@@ -16,12 +16,8 @@ jobs:
       steps:
         - name: Check PR Labels
           id: set_output
-          run: |
-            export RAW_LABELS="${{ toJSON(github.event.pull_request.labels) }}"
-            # echo "Raw PR labels: $raw_labels" | grep '"name"' | sed -E 's/.*"name": "(.*)".*/\1/'
+          run: export RAW_LABELS="${{ toJSON(github.event.pull_request.labels) }}"
             
-            # Extrair os valores da propriedade name
-            echo "$RAW_LABELS" | grep '"name"' | sed -E 's/.*"name": "(.*)".*/\1/'
 
     check-labels:
         needs: handle_label
