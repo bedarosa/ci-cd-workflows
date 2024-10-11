@@ -9,5 +9,6 @@ jobs:
         id: set_output
         run: |
           labels=$(echo '${{ toJSON(github.event.pull_request.labels) }}')
+          export labels
           echo "labels=$labels" >> $GITHUB_OUTPUT
 
