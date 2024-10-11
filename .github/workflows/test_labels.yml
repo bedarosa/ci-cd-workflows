@@ -8,23 +8,23 @@ jobs:
       - name: Check PR Labels
         id: set_output
         run: |
-          raw_labels="${{ toJSON(github.event.pull_request.labels) }}"
-          echo "Raw PR labels: $raw_labels"
+          raw_labels="${{ toJSON(github.event.pull_request.labels[0].name) }}"
+          echo "Raw PR labels: $raw_labels | grep name"
           
-          if [ "$raw_labels" == "null" ]; then
-            echo "No labels found"
-            echo "labels=[]" >> $GITHUB_OUTPUT
-            exit 0
-          fi
+          #  if [ "$raw_labels" == "null" ]; then
+          #    echo "No labels found"
+          #    echo "labels=[]" >> $GITHUB_OUTPUT
+          #    exit 0
+          #  fi
 
-          # Check for valid JSON before using jq
-          echo "$raw_labels" | jq . >/dev/null 2>&1
-          if [ $? -ne 0 ]; then
-            echo "Invalid JSON: $raw_labels"
-            exit 1
-          fi
+          #  # Check for valid JSON before using jq
+          #  echo "$raw_labels" | jq . >/dev/null 2>&1
+          #  if [ $? -ne 0 ]; then
+          #    echo "Invalid JSON: $raw_labels"
+          #    exit 1
+          #  fi
 
-          labels=$(echo "$raw_labels" | jq -c .)
-          echo "labels=$labels" >> $GITHUB_OUTPUT
+          #  labels=$(echo "$raw_labels" | jq -c .)
+          #  echo "labels=$labels" >> $GITHUB_OUTPUT
 
           
