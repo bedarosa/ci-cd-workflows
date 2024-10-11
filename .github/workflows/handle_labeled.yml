@@ -4,7 +4,7 @@ on:
   pull_request:
     types: [labeled]  # Aciona quando uma label é adicionada a um PR
 
-jobs:
+jobs: 
   handle_label:
     runs-on: ubuntu-latest
     steps:
