@@ -16,7 +16,9 @@ jobs:
       steps:
         - name: Check PR Labels
           id: set_output
-          run: export RAW_LABELS="${{ toJSON(github.event.pull_request.labels) }}"
+          run: |
+            RAW_LABELS="${{ toJSON(github.event.pull_request.labels) }}"
+            echo "Raw PR labels: $raw_labels"
             
 
     check-labels:
