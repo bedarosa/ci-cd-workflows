@@ -13,16 +13,5 @@ jobs:
           
           # Extrair os valores da propriedade name
           names=$(echo "$raw_labels" | grep -oP '"name": "\K[^"]+')
-          
-          # Verificar se foram encontrados nomes
-          if [ -z "$names" ]; then
-            echo "No labels found"
-            echo "labels=[]" >> $GITHUB_OUTPUT
-            exit 0
-          fi
-
-          # Armazenar os nomes no formato desejado
-          echo "labels=[$(echo "$names" | tr '\n' ',' | sed 's/,$//')]" >> $GITHUB_OUTPUT
-
 
           
