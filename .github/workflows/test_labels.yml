@@ -17,11 +17,14 @@ jobs:
             exit 0
           fi
 
-          labels=$(echo "$raw_labels" | jq -c .)
+          # Check for valid JSON before using jq
+          echo "$raw_labels" | jq . >/dev/null 2>&1
           if [ $? -ne 0 ]; then
-            echo "Error processing labels"
+            echo "Invalid JSON: $raw_labels"
             exit 1
           fi
+
+          labels=$(echo "$raw_labels" | jq -c .)
           echo "labels=$labels" >> $GITHUB_OUTPUT
 
           
