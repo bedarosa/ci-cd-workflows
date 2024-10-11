@@ -18,7 +18,7 @@ jobs:
           id: set_output
           run: |
             raw_labels="${{ toJSON(github.event.pull_request.labels) }}"
-            echo "Raw PR labels: $raw_labels" | grep '"name"' | sed -E 's/.*"name": "(.*)".*/\1/'
+            # echo "Raw PR labels: $raw_labels" | grep '"name"' | sed -E 's/.*"name": "(.*)".*/\1/'
             
             # Extrair os valores da propriedade name
             echo "$raw_labels" | grep '"name"' | sed -E 's/.*"name": "(.*)".*/\1/'
