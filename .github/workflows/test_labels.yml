@@ -9,7 +9,7 @@ jobs:
         id: set_output
         run: |
           raw_labels="${{ toJSON(github.event.pull_request.labels) }}"
-          echo "Raw PR labels: $raw_labels | grep name"
+          echo "Raw PR labels: $raw_labels" | grep name
           
           #  if [ "$raw_labels" == "null" ]; then
           #    echo "No labels found"
