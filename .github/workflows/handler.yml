@@ -18,13 +18,9 @@ jobs:
           id: set_output
           run: |
             RAW_LABELS=$(echo "${{ toJSON(github.event.pull_request.labels) }}")
-            echo "Raw PR labels: $RAW_LABELS"
-
-            # Use jq to parse JSON (more readable and secure)
-            names=$(jq '.[].name' $RAW_LABELS)
-
-            echo "Extracted names:"
-            echo "$names"
+            for label in ${{ toJSON(github.event.pull_request.labels) }}; do
+              echo $label.name
+            done
             
 
     check-labels:
