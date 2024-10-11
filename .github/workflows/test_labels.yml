@@ -12,6 +12,6 @@ jobs:
           echo "Raw PR labels: $raw_labels"
           
           # Extrair os valores da propriedade name
-          names=$(echo "$raw_labels" | grep -oP '"name":\s*"\K[^"]+')
+          names=$(echo "$raw_labels" | grep '"name"' | sed -E 's/.*"name": "(.*)".*/\1/')
 
           
