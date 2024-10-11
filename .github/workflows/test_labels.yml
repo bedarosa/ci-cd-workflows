@@ -9,22 +9,20 @@ jobs:
         id: set_output
         run: |
           raw_labels="${{ toJSON(github.event.pull_request.labels) }}"
-          echo "Raw PR labels: $raw_labels" | sed -n 's/.*"name": "\(.*\)".*/\1/p'
+          echo "Raw PR labels: $raw_labels"
           
-          #  if [ "$raw_labels" == "null" ]; then
-          #    echo "No labels found"
-          #    echo "labels=[]" >> $GITHUB_OUTPUT
-          #    exit 0
-          #  fi
+          # Extrair os valores da propriedade name
+          names=$(echo "$raw_labels" | sed -n 's/.*"name": "\(.*\)".*/\1/p')
+          
+          # Verificar se foram encontrados nomes
+          if [ -z "$names" ]; then
+            echo "No labels found"
+            echo "labels=[]" >> $GITHUB_OUTPUT
+            exit 0
+          fi
 
-          #  # Check for valid JSON before using jq
-          #  echo "$raw_labels" | jq . >/dev/null 2>&1
-          #  if [ $? -ne 0 ]; then
-          #    echo "Invalid JSON: $raw_labels"
-          #    exit 1
-          #  fi
+          # Armazenar os nomes no formato desejado
+          echo "labels=[$(echo "$names" | tr '\n' ',' | sed 's/,$//')]" >> $GITHUB_OUTPUT
 
-          #  labels=$(echo "$raw_labels" | jq -c .)
-          #  echo "labels=$labels" >> $GITHUB_OUTPUT
 
           
