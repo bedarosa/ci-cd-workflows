@@ -6,8 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check PR Labels
+        id: set_output
         run: |
-          echo "Labels on the PR:"
-          labels=$(echo "${{ toJSON(github.event.pull_request.labels.*.name) }}")
-          echo "labels=$labels" >> $GITHUB_OUTPUT
-
+          labels=$(echo '${{ toJSON(github.event.pull_request.labels) }}')
+          echo "labels=$labels" >> $GITHUB_OUTPUT  # Armazenar o output

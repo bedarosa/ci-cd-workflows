@@ -12,12 +12,12 @@ permissions:
 jobs:
 
     labeled:
-        uses: ./.github/workflows/labeler.yml
+        uses: ./.github/workflows/test_labels.yml
 
     check-labels:
         needs: labeled
         runs-on: ubuntu-latest
         steps:
-        - name: Get Labels Output
-          run: |
-            echo "Labels from the labeled job: ${{ needs.labeled.outputs.labels }}"
+          - name: Get Labels Output
+            run: |
+                echo "Labels from the labeled job: ${{ needs.labeled.outputs.labels }}"
