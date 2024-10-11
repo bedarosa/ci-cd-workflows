@@ -12,7 +12,7 @@ permissions:
 jobs:
 
     labeled:
-        uses: ./.github/workflows/test_labels.yml
+        uses: ./.github/workflows/labeler.yml
 
     check-labels:
         needs: labeled

@@ -9,5 +9,5 @@ jobs:
         run: |
           echo "Labels on the PR:"
           labels=$(echo "${{ toJSON(github.event.pull_request.labels.*.name) }}")
-          echo "labels=$labels" >> $GITHUB_OUTPUT  # Armazenar as labels no output
+          echo "labels=$labels" >> $GITHUB_OUTPUT
 

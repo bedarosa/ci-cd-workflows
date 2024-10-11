@@ -17,3 +17,8 @@ jobs:
     - uses: actions/labeler@v5
       with:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Set Output for Labels
+      id: set_output
+      run: |
+        echo "labels=$(echo '${{ toJSON(github.event.pull_request.labels) }}')" >> $GITHUB_OUTPUT
