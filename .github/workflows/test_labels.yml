@@ -8,7 +8,6 @@ jobs:
       - name: Check PR Labels
         id: set_output
         run: |
-          labels=$(echo '${{ toJSON(github.event.pull_request.labels) }}')
-          export labels
+          labels=$(echo "${{ toJSON(github.event.pull_request.labels) }}" | jq -c .)
           echo "labels=$labels" >> $GITHUB_OUTPUT
-
+          
