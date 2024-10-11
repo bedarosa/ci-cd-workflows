@@ -9,7 +9,7 @@ jobs:
         id: set_output
         run: |
           raw_labels="${{ toJSON(github.event.pull_request.labels) }}"
-          echo "Raw PR labels: $raw_labels" | jq -r '.[].name'
+          echo "Raw PR labels: $raw_labels" | sed -n 's/.*"name": "\(.*\)".*/\1/p'
           
           #  if [ "$raw_labels" == "null" ]; then
           #    echo "No labels found"
