@@ -21,7 +21,7 @@ jobs:
             echo "Raw PR labels: $RAW_LABELS"
 
             # Use jq to parse JSON (more readable and secure)
-            names=$(echo "$RAW_LABELS" | jq -r '.[].name')
+            names=$(echo "$RAW_LABELS" | jq --raw-output '.[].name')
 
             echo "Extracted names:"
             echo "$names"
