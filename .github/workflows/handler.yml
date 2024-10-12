@@ -18,10 +18,14 @@ jobs:
           id: set_output
           run: |
             RAW_LABELS=$(echo "${{ toJSON(github.event.pull_request.labels) }}")
-            for label in ${{ toJSON(github.event.pull_request.labels) }}; do
-              echo $label.name
-            done
-            
+            if echo "$labels" | grep -q '"name": "orbitdotnet"'; then
+              echo "O rótulo 'orbitdotnet' está presente."
+              echo "label_found=true" >> $GITHUB_ENV
+            else
+              echo "O rótulo 'orbitdotnet' NÃO está presente."
+              echo "label_found=false" >> $GITHUB_ENV
+            fi
+
 
     check-labels:
         needs: handle_label
