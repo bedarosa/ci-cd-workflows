@@ -20,7 +20,7 @@ jobs:
             labels="${{ toJSON(github.event.pull_request.labels) }}"
             echo "Rótulos: $labels"
 
-            if echo "$labels" | grep -q '"name": "orbitdotnet"'; then
+            if echo "$labels" | grep -q orbitdotnet; then
               echo "O rótulo 'orbitdotnet' está presente."
               echo "label_found=true" >> $GITHUB_ENV
             else
