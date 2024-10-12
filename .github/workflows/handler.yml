@@ -43,13 +43,13 @@ jobs:
         steps:
           - name: Get Labels Output
             run: |
-              if [ "${{ env.orbitdotnet_found }}" = "true" ]; then
+              if [ "$orbitdotnet_found" = "true" ]; then
                 echo "Ações a serem executadas quando o rótulo é encontrado."
               else
                 echo "Ações alternativas quando o rótulo não é encontrado."
               fi
 
-              if [ "${{ env.results_found }}" = "true" ]; then
+              if [ "$results_found" = "true" ]; then
                 echo "Ações a serem executadas quando o rótulo é encontrado."
               else
                 echo "Ações alternativas quando o rótulo não é encontrado."
