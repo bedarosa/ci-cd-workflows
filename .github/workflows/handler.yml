@@ -15,27 +15,27 @@ jobs:
       runs-on: ubuntu-latest
       steps:
         - name: Check PR Labels
-          id: set_output
+          id: handle_label
           run: |
             labels="${{ toJSON(github.event.pull_request.labels) }}"
             echo "Rótulos: $labels"
 
             if echo "$labels" | grep -q orbitdotnet; then
               echo "O rótulo 'orbitdotnet' está presente."
-              echo "ORBITDOTNET_FOUND=true" >> $GITHUB_ENV
+              echo "ORBITDOTNET_FOUND=true" >> $GITHUB_OUTPUT
               echo $ORBITDOTNET_FOUND
             else
               echo "O rótulo 'orbitdotnet' NÃO está presente."
-              echo "ORBITDOTNET_FOUND=false" >> $GITHUB_ENV
+              echo "ORBITDOTNET_FOUND=false" >> $GITHUB_OUTPUT
             fi
 
             if echo "$labels" | grep -q results; then
               echo "O rótulo 'results' está presente."
-              echo "RESULTS_FOUND=true" >> $GITHUB_ENV
+              echo "RESULTS_FOUND=true" >> $GITHUB_OUTPUT
               echo $RESULTS_FOUND
             else
               echo "O rótulo 'results' NÃO está presente."
-              echo "RESULTS_FOUND=false" >> $GITHUB_ENV
+              echo "RESULTS_FOUND=false" >> $GITHUB_OUTPUT
             fi
 
     teste:
@@ -43,7 +43,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
           - name: Update package OrbitDotnet
-            if: ${{ env.ORBITDOTNET_FOUND == 'true'}}
+            if: steps.handle_label.outputs.RESULTS_FOUND == 'true'
             run: |
               echo "OrbitDotnet = true"
 
