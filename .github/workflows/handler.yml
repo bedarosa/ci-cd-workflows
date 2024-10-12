@@ -37,6 +37,7 @@ jobs:
             fi
 
     teste:
+        needs: handle_label
         runs-on: ubuntu-latest
         steps:
           - name: Update package OrbitDotnet
