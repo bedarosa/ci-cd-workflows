@@ -23,6 +23,7 @@ jobs:
             if echo "$labels" | grep -q orbitdotnet; then
               echo "O rótulo 'orbitdotnet' está presente."
               echo "ORBITDOTNET_FOUND=true" >> $GITHUB_ENV
+              echo $ORBITDOTNET_FOUND
             else
               echo "O rótulo 'orbitdotnet' NÃO está presente."
               echo "ORBITDOTNET_FOUND=false" >> $GITHUB_ENV
@@ -31,6 +32,7 @@ jobs:
             if echo "$labels" | grep -q results; then
               echo "O rótulo 'results' está presente."
               echo "RESULTS_FOUND=true" >> $GITHUB_ENV
+              echo $RESULTS_FOUND
             else
               echo "O rótulo 'results' NÃO está presente."
               echo "RESULTS_FOUND=false" >> $GITHUB_ENV
