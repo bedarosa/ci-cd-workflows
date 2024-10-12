@@ -17,7 +17,9 @@ jobs:
         - name: Check PR Labels
           id: set_output
           run: |
-            RAW_LABELS=$(echo "${{ toJSON(github.event.pull_request.labels) }}")
+            labels="${{ toJSON(github.event.pull_request.labels) }}"
+            echo "Rótulos: $labels"
+
             if echo "$labels" | grep -q '"name": "orbitdotnet"'; then
               echo "O rótulo 'orbitdotnet' está presente."
               echo "label_found=true" >> $GITHUB_ENV
