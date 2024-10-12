@@ -22,19 +22,27 @@ jobs:
 
             if echo "$labels" | grep -q orbitdotnet; then
               echo "O rótulo 'orbitdotnet' está presente."
-              echo "orbitdotnet_found=true" >> $GITHUB_ENV
+              echo "ORBITDOTNET_FOUND=true" >> $GITHUB_ENV
             else
               echo "O rótulo 'orbitdotnet' NÃO está presente."
-              echo "orbitdotnet_found=false" >> $GITHUB_ENV
+              echo "ORBITDOTNET_FOUND=false" >> $GITHUB_ENV
             fi
 
             if echo "$labels" | grep -q results; then
               echo "O rótulo 'results' está presente."
-              echo "results_found=true" >> $GITHUB_ENV
+              echo "RESULTS_FOUND=true" >> $GITHUB_ENV
             else
               echo "O rótulo 'results' NÃO está presente."
-              echo "results_found=false" >> $GITHUB_ENV
+              echo "RESULTS_FOUND=false" >> $GITHUB_ENV
             fi
+
+    teste:
+        runs-on: ubuntu-latest
+        steps:
+          - name: Update package OrbitDotnet
+            if: ${{ env.ORBITDOTNET_FOUND == 'true'}}
+            run: |
+              echo "OrbitDotnet = true"
 
 
     check-labels:
@@ -43,13 +51,13 @@ jobs:
         steps:
           - name: Get Labels Output
             run: |
-              if [ "$orbitdotnet_found" = "true" ]; then
+              if [ "$ORBITDOTNET_FOUND" = "true" ]; then
                 echo "Ações a serem executadas quando o rótulo é encontrado."
               else
                 echo "Ações alternativas quando o rótulo não é encontrado."
               fi
 
-              if [ "$results_found" = "true" ]; then
+              if [ "$RESULTS_FOUND" = "true" ]; then
                 echo "Ações a serem executadas quando o rótulo é encontrado."
               else
                 echo "Ações alternativas quando o rótulo não é encontrado."
