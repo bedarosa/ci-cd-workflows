@@ -2,7 +2,7 @@ orbitdotnet:
 - changed-files:
   - any-glob-to-any-file: 'Dotnet.TestApp/**/*'
 
-orbitdotnetresult:
+results:
 - changed-files:
   - any-glob-to-any-file: 'Dotnet.Results/**/*'
 

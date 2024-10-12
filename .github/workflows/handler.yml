@@ -22,10 +22,18 @@ jobs:
 
             if echo "$labels" | grep -q orbitdotnet; then
               echo "O rótulo 'orbitdotnet' está presente."
-              echo "label_found=true" >> $GITHUB_ENV
+              echo "orbitdotnet_found=true" >> $GITHUB_ENV
             else
               echo "O rótulo 'orbitdotnet' NÃO está presente."
-              echo "label_found=false" >> $GITHUB_ENV
+              echo "orbitdotnet_found=false" >> $GITHUB_ENV
+            fi
+
+            if echo "$labels" | grep -q results; then
+              echo "O rótulo 'results' está presente."
+              echo "results_found=true" >> $GITHUB_ENV
+            else
+              echo "O rótulo 'results' NÃO está presente."
+              echo "results_found=false" >> $GITHUB_ENV
             fi
 
 
@@ -35,4 +43,8 @@ jobs:
         steps:
           - name: Get Labels Output
             run: |
-                echo "Labels from the labeled job: " echo output.txt
+                echo "${{ env.orbitdotnet_found }}"
+                echo ${{ env.orbitdotnet_found }}
+                echo "${{ env.results_found }}"
+                echo ${{ env.results_found }}
+
