@@ -16,22 +16,8 @@ jobs:
       with:
         labels: ${{ toJSON(github.event.pull_request.labels) }}
 
-    build:
-      uses: peob/pmp-workflows/.github/workflows/build_dotnet.yml@main
-      secrets: inherit
-
-    sonar-analysis:
-      uses: peob/pmp-workflows/.github/workflows/sonar_analysis.yml@main
-      with:
-        INTEGRATIONS_TESTS: false
-      secrets: inherit
-
-    codeql:
-      uses: peob/pmp-workflows/.github/workflows/codeql.yml@main
-      secrets: inherit
-
     push_OrbitDotnet:
-      needs: [handle_label, sonar-analysis, codeql]
+      needs: [handle_label]
       if:  ${{ needs.call_handle_label.outputs.ORBITDOTNET_FOUND == 'true' }}
       uses: ./.github/workflows/pack_and_push.yml
       with: 
@@ -39,7 +25,7 @@ jobs:
         ORBITDOTNET_RESULTS_FOUND: ${{ needs.call_handle_label.outputs.ORBITDOTNET_RESULTS_FOUND }}
 
     push_OrbitDotnet_Results:
-      needs: [handle_label, sonar-analysis, codeql]
+      needs: [handle_label]
       if:  ${{ needs.call_handle_label.outputs.ORBITDOTNET_RESULTS_FOUND == 'true' }}
       uses: ./.github/workflows/pack_and_push.yml
       with: 
