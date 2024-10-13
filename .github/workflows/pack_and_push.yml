@@ -1,0 +1,26 @@
+name: Pack and Push
+
+on:
+    workflow_call:
+        inputs:
+            ORBITDOTNET_FOUND:
+                required: false
+                type: boolean
+            RESULTS_FOUND:
+                required: false
+                type: boolean
+
+jobs:
+
+    orbit:
+        runs-on: cawe-linux-x64-compute-medium
+        steps:
+            - name: Setup .NET
+              if: ${{ inputs.ORBITDOTNET_FOUND }}
+              run: |
+                echo "OrbitDotnet Found"
+
+            - name: Setup .NET
+              if: ${{ inputs.RESULTS_FOUND }}
+              run: |
+                echo "Results Found"

@@ -16,15 +16,23 @@ jobs:
         labels: ${{ toJSON(github.event.pull_request.labels) }}
 
 
-    teste:
-        needs: call_handle_label
-        runs-on: ubuntu-latest
-        steps:
+    push_OrbitDotnet:
+      needs: call_handle_label
+      if:  ${{ needs.call_handle_label.outputs.ORBITDOTNET_FOUND }}
+      uses: ./.github/workflows/pack_and_push.yml
+      with: 
+          ORBITDOTNET_FOUND: ${{ needs.call_handle_label.outputs.ORBITDOTNET_FOUND }}
+          RESULTS_FOUND: ${{ needs.call_handle_label.outputs.RESULTS_FOUND }}
+
           
-          - name: Update package OrbitDotnet
-            if: ${{ needs.call_handle_label.outputs.ORBITDOTNET_FOUND || needs.call_handle_label.outputs.RESULTS_FOUND }}
-            run: |
-              echo "OrbitDotnet Found: $ORBITDOTNET_FOUND"
-              echo "Results Found: $RESULTS_FOUND"
+
+    push_OrbitDotnet_Results:
+      needs: call_handle_label
+      if:  ${{ needs.call_handle_label.outputs.RESULTS_FOUND }}
+      uses: ./.github/workflows/pack_and_push.yml
+      with: 
+          ORBITDOTNET_FOUND: ${{ needs.call_handle_label.outputs.ORBITDOTNET_FOUND }}
+          RESULTS_FOUND: ${{ needs.call_handle_label.outputs.RESULTS_FOUND }}
+
 
 
