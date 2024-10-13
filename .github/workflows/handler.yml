@@ -10,9 +10,11 @@ permissions:
 
   
 jobs:
-
     handle_label:
       runs-on: ubuntu-latest
+      outputs:
+        ORBITDOTNET_FOUND: ${{ steps.handle_label.outputs.ORBITDOTNET_FOUND }}
+        RESULTS_FOUND: ${{ steps.handle_label.outputs.RESULTS_FOUND }}
       steps:
         - name: Check PR Labels
           id: handle_label
@@ -42,8 +44,12 @@ jobs:
         needs: handle_label
         runs-on: ubuntu-latest
         steps:
+          
           - name: Update package OrbitDotnet
-            if: steps.handle_label.outputs.RESULTS_FOUND == 'true'
+            env:
+              ORBITDOTNET_FOUND: ${{needs.handle_label.outputs.ORBITDOTNET_FOUND}}
+              RESULTS_FOUND: ${{needs.handle_label.outputs.RESULTS_FOUND}}
+            if: env.OUTPUT1 == 'true'
             run: |
               echo "OrbitDotnet = true"
 
