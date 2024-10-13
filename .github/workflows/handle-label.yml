@@ -25,7 +25,7 @@ jobs:
           labels="${{ inputs.labels }}"
           echo "Rótulos: $labels"
 
-          if echo "$labels" | grep -q OrbitDotnet; then
+          if echo "$labels" | grep -q OrbitDotnet,; then
             echo "O rótulo 'OrbitDotnet' está presente."
             echo "ORBITDOTNET_FOUND=true" >> $GITHUB_OUTPUT
           else
@@ -33,7 +33,7 @@ jobs:
             echo "ORBITDOTNET_FOUND=false" >> $GITHUB_OUTPUT
           fi
 
-          if echo "$labels" | grep -q OrbitDotnet.Results; then
+          if echo "$labels" | grep -q OrbitDotnet.Results,; then
             echo "O rótulo 'results' está presente."
             echo "ORBITDOTNET_RESULTS_FOUND=true" >> $GITHUB_OUTPUT
           else
