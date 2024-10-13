@@ -49,7 +49,7 @@ jobs:
             env:
               ORBITDOTNET_FOUND: ${{needs.handle_label.outputs.ORBITDOTNET_FOUND}}
               RESULTS_FOUND: ${{needs.handle_label.outputs.RESULTS_FOUND}}
-            if: env.OUTPUT1 == 'true'
+            if: env.ORBITDOTNET_FOUND == 'true'
             run: |
               echo "OrbitDotnet = true"
 
