@@ -22,9 +22,7 @@ jobs:
         steps:
           
           - name: Update package OrbitDotnet
-            env:
-              ORBITDOTNET_FOUND: ${{ needs.call_handle_label.outputs.ORBITDOTNET_FOUND }}
-              RESULTS_FOUND: ${{ needs.call_handle_label.outputs.RESULTS_FOUND }}
+            if: ${{ needs.call_handle_label.outputs.ORBITDOTNET_FOUND || needs.call_handle_label.outputs.RESULTS_FOUND }}
             run: |
               echo "OrbitDotnet Found: $ORBITDOTNET_FOUND"
               echo "Results Found: $RESULTS_FOUND"
