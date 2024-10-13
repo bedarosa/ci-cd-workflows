@@ -5,10 +5,10 @@ on:
         inputs:
             ORBITDOTNET_FOUND:
                 required: false
-                type: boolean
+                type: string
             RESULTS_FOUND:
                 required: false
-                type: boolean
+                type: string
 
 jobs:
 
