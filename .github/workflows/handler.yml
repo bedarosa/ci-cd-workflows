@@ -23,8 +23,8 @@ jobs:
           
           - name: Update package OrbitDotnet
             env:
-              ORBITDOTNET_FOUND: ${{needs.handle_label.outputs.ORBITDOTNET_FOUND}}
-              RESULTS_FOUND: ${{needs.handle_label.outputs.RESULTS_FOUND}}
+              ORBITDOTNET_FOUND: ${{ needs.call_handle_label.outputs.ORBITDOTNET_FOUND }}
+              RESULTS_FOUND: ${{ needs.call_handle_label.outputs.RESULTS_FOUND }}
             if: env.ORBITDOTNET_FOUND == 'true'
             run: |
               echo "OrbitDotnet = true"
