@@ -16,11 +16,11 @@ jobs:
         runs-on: cawe-linux-x64-compute-medium
         steps:
             - name: Setup .NET
-              if: ${{ inputs.ORBITDOTNET_FOUND }}
+              if: ${{ inputs.ORBITDOTNET_FOUND == 'true' }}
               run: |
                 echo "OrbitDotnet Found"
 
             - name: Setup .NET
-              if: ${{ inputs.RESULTS_FOUND }}
+              if: ${{ inputs.RESULTS_FOUND == 'true' }}
               run: |
                 echo "Results Found"
