@@ -1,4 +1,5 @@
 name: Pack and Push
+run-name: Pack and Push
 
 on:
     workflow_call:
