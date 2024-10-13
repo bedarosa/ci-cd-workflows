@@ -1,0 +1,37 @@
+name: Handle PR Labels
+
+on:
+  workflow_call:
+    inputs:
+      labels:
+        required: true
+        type: string
+
+jobs:
+  handle_label:
+    runs-on: ubuntu-latest
+    outputs:
+      ORBITDOTNET_FOUND: ${{ steps.check_labels.outputs.ORBITDOTNET_FOUND }}
+      RESULTS_FOUND: ${{ steps.check_labels.outputs.RESULTS_FOUND }}
+    steps:
+      - name: Check PR Labels
+        id: check_labels
+        run: |
+          labels="${{ inputs.labels }}"
+          echo "Rótulos: $labels"
+
+          if echo "$labels" | grep -q '"name": "orbitdotnet"'; then
+            echo "O rótulo 'orbitdotnet' está presente."
+            echo "ORBITDOTNET_FOUND=true" >> $GITHUB_OUTPUT
+          else
+            echo "O rótulo 'orbitdotnet' NÃO está presente."
+            echo "ORBITDOTNET_FOUND=false" >> $GITHUB_OUTPUT
+          fi
+
+          if echo "$labels" | grep -q '"name": "results"'; then
+            echo "O rótulo 'results' está presente."
+            echo "RESULTS_FOUND=true" >> $GITHUB_OUTPUT
+          else
+            echo "O rótulo 'results' NÃO está presente."
+            echo "RESULTS_FOUND=false" >> $GITHUB_OUTPUT
+          fi
