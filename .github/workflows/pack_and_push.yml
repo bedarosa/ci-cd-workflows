@@ -6,7 +6,7 @@ on:
             ORBITDOTNET_FOUND:
                 required: false
                 type: string
-            RESULTS_FOUND:
+            ORBITDOTNET_RESULTS_FOUND:
                 required: false
                 type: string
 
@@ -21,6 +21,6 @@ jobs:
                 echo "OrbitDotnet Found"
 
             - name: Setup .NET
-              if: ${{ inputs.RESULTS_FOUND == 'true' }}
+              if: ${{ inputs.ORBITDOTNET_RESULTS_FOUND == 'true' }}
               run: |
                 echo "Results Found"
