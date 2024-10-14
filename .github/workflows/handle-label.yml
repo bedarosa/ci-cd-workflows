@@ -40,3 +40,27 @@ jobs:
             echo "O rótulo 'OrbitDotnet.Results' NÃO está presente."
             echo "ORBITDOTNET_RESULTS_FOUND=false" >> $GITHUB_OUTPUT
           fi
+  
+  handle_label_in_master:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check PR Labels on master
+        id: check_labels_master
+        run: |
+          # Obter o commit SHA do push
+          commit_sha="${{ github.sha }}"
+          
+          # Usar a API do GitHub para encontrar o PR associado ao commit
+          pr_url=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            "https://api.github.com/repos/${{ github.repository }}/commits/${commit_sha}/pulls" | jq -r '.[0].url')
+
+          if [ "$pr_url" != "null" ]; then
+            echo "PR URL: $pr_url"
+            # Obter as labels do PR
+            labels=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" "$pr_url" | jq -r '.labels[].name')
+            echo "Labels do PR:"
+            echo "$labels" | tr '\n' ',' | sed 's/,$//'
+            echo "LABELS=$labels" >> $GITHUB_ENV
+          else
+            echo "Nenhum PR associado a este commit."
+          fi
