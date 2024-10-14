@@ -28,7 +28,7 @@ jobs:
             pr_url=$(echo "$pr_response" | jq -r '.[0].url')
             echo "PR URL: $pr_url"
 
-            labels=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" "$pr_url" | grep -F 'OrbitDotnet",')
+            labels=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" "$pr_url")
             if echo "$labels" | grep -F 'OrbitDotnet",'; then
                 echo "The label 'OrbitDotnet' was found."
                 echo "ORBITDOTNET_FOUND=true" >> $GITHUB_OUTPUT
