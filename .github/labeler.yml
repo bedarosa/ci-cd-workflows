@@ -4,7 +4,7 @@ OrbitDotnet:
 
 OrbitDotnet.Results:
 - changed-files:
-  - any-glob-to-any-file: ['!Dotnet.Results/*.md', '!Dotnet.Results/docs/*', 'Dotnet.Results/**/*']
+  - any: ['Dotnet.Results/**/*', '!Dotnet.Results/docs/*']
   
 
 documentation:
@@ -14,3 +14,7 @@ documentation:
     - '.github/**/*.md'
     - 'Dotnet.Results/docs/**/*'
     - 'Dotnet.Results/README.md'
+
+teste:
+- changed-files:
+  -any: 
