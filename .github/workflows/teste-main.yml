@@ -23,7 +23,7 @@ jobs:
           pr_response=$(curl -s -H "Authorization: token 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" \
             "https://api.github.com/repos/${{ github.repository }}/commits/${commit_sha}/pulls")
 
-          echo "$pr_response"
+          echo "$pr_response | grep "html_url""
 
           # Verificar se o PR foi encontrado
           if [[ $(echo "$pr_response" | jq 'length') -gt 0 ]]; then
