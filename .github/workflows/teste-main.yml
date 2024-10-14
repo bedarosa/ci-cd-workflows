@@ -2,8 +2,8 @@ name: Teste Main
 
 on:
     push: 
-      branches:
-        - main
+        branches:
+        - master
 
         
 jobs:
