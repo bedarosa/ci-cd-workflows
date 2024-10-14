@@ -28,19 +28,19 @@ jobs:
             pr_url=$(echo "$pr_response" | jq -r '.[0].url')
             echo "PR URL: $pr_url"
 
-          labels=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" "$pr_url" | grep -F 'OrbitDotnet",')
-          if echo "$labels" | grep -F 'OrbitDotnet",'; then
-            echo "The label 'OrbitDotnet' was found."
-            echo "ORBITDOTNET_FOUND=true" >> $GITHUB_OUTPUT
-          else
-            echo "The label 'orbitdotnet' was not found."
-            echo "ORBITDOTNET_FOUND=false" >> $GITHUB_OUTPUT
-          fi
+            labels=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" "$pr_url" | grep -F 'OrbitDotnet",')
+            if echo "$labels" | grep -F 'OrbitDotnet",'; then
+                echo "The label 'OrbitDotnet' was found."
+                echo "ORBITDOTNET_FOUND=true" >> $GITHUB_OUTPUT
+            else
+                echo "The label 'orbitdotnet' was not found."
+                echo "ORBITDOTNET_FOUND=false" >> $GITHUB_OUTPUT
+            fi
 
-          if echo "$labels" | grep -F 'OrbitDotnet.Results",'; then
-            echo "The label 'OrbitDotnet.Results' was found."
-            echo "ORBITDOTNET_RESULTS_FOUND=true" >> $GITHUB_OUTPUT
-          else
-            echo "The label 'OrbitDotnet.Results' was not found."
-            echo "ORBITDOTNET_RESULTS_FOUND=false" >> $GITHUB_OUTPUT
-          fi
+            if echo "$labels" | grep -F 'OrbitDotnet.Results",'; then
+                echo "The label 'OrbitDotnet.Results' was found."
+                echo "ORBITDOTNET_RESULTS_FOUND=true" >> $GITHUB_OUTPUT
+            else
+                echo "The label 'OrbitDotnet.Results' was not found."
+                echo "ORBITDOTNET_RESULTS_FOUND=false" >> $GITHUB_OUTPUT
+            fi
