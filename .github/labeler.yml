@@ -1,20 +1,16 @@
-# OrbitDotnet:
-# - changed-files:
-#   - any-glob-to-any-file: 'Dotnet.TestApp/**/*'
+OrbitDotnet:
+- changed-files:
+  - any-glob-to-any-file: 'Dotnet.TestApp/**/*'
 
 OrbitDotnet.Results:
 - changed-files:
-  - any: ['Dotnet.Results/**/*', '!Dotnet.Results/docs/*']
+  - any-glob-to-any-file: ['!Dotnet.Results/*.md', '!Dotnet.Results/docs/*', 'Dotnet.Results/**/*']
   
 
-# documentation:
-# - changed-files:
-#   - any-glob-to-any-file:
-#     - '*.md'
-#     - '.github/**/*.md'
-#     - 'Dotnet.Results/docs/**/*'
-#     - 'Dotnet.Results/README.md'
-
-# teste:
-# - changed-files:
-#   -any: 
+documentation:
+- changed-files:
+  - any-glob-to-any-file:
+    - '*.md'
+    - '.github/**/*.md'
+    - 'Dotnet.Results/docs/**/*'
+    - 'Dotnet.Results/README.md'
