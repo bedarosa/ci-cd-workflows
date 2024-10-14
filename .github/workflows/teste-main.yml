@@ -44,3 +44,6 @@ jobs:
                 echo "The label 'OrbitDotnet.Results' was not found."
                 echo "ORBITDOTNET_RESULTS_FOUND=false" >> $GITHUB_OUTPUT
             fi
+          else
+            echo "Deu ruim"
+          fi
