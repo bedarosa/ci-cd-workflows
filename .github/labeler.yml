@@ -4,9 +4,10 @@ OrbitDotnet:
 
 OrbitDotnet.Results:
 - changed-files:
-  - any-glob-to-any-file: 'Dotnet.Results/**/*'
   - all-globs-to-all-files: '!Dotnet.Results/docs/*'
   - all-globs-to-all-files: '!Dotnet.Results/*.md'
+  - any-glob-to-any-file: 'Dotnet.Results/**/*'
+  
 
 documentation:
 - changed-files:
