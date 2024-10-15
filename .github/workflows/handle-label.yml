@@ -19,6 +19,8 @@ jobs:
       ORBITDOTNET_FOUND: ${{ steps.check_labels.outputs.ORBITDOTNET_FOUND }}
       ORBITDOTNET_RESULTS_FOUND: ${{ steps.check_labels.outputs.ORBITDOTNET_RESULTS_FOUND }}
     steps:
+      - name: Check out code
+        uses: actions/checkout@v2
       - name: Check PR Labels
         id: check_labels
         run: |
