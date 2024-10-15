@@ -1,21 +1,17 @@
 name: "(internal) Pull Request Labeler"
 run-name: "(internal) Pull Request Labeler"
-#on:
-#- pull_request_target
 
 on:
-    pull_request:
-
+  workflow_call:
+    
 jobs:
   labeler:
     permissions:
       contents: read
       pull-requests: write
-    runs-on: "ubuntu-latest"
+    runs-on: "cawe-linux-x64-compute-medium"
 
     steps:
-    - uses: actions/labeler@v5.0.0
+    - uses: actions/labeler@v5
       with:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
-
-    

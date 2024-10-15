@@ -2,10 +2,12 @@ name: Release Candidate Workflow
 
 on:
     pull_request: 
-        types: [labeled]
 
   
 jobs:
+    labeler:
+      uses: ./.github/workflows/labeler
+
     handle_label:
       uses: ./.github/workflows/teste-main.yml
 
