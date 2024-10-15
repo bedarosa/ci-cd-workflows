@@ -6,7 +6,7 @@ on:
   
 jobs:
     labeler:
-      uses: ./.github/workflows/labeler
+      uses: ./.github/workflows/labeler.yml
 
     handle_label:
       uses: ./.github/workflows/teste-main.yml
