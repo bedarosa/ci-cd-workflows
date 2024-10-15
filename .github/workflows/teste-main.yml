@@ -1,14 +1,19 @@
 name: Teste Main
 
 on:
-    push: 
-        branches:
-        - master
-
+    workflow_call:
+      outputs:
+        ORBITDOTNET_FOUND:
+          value: ${{ jobs.get_labels.outputs.ORBITDOTNET_FOUND }}
+        ORBITDOTNET_RESULTS_FOUND:
+          value: ${{ jobs.get_labels.outputs.ORBITDOTNET_RESULTS_FOUND }}
         
 jobs:
   get_labels:
     runs-on: ubuntu-latest
+    outputs:
+      ORBITDOTNET_FOUND: ${{ steps.get_pr.outputs.ORBITDOTNET_FOUND }}
+      ORBITDOTNET_RESULTS_FOUND: ${{ steps.get_pr.outputs.ORBITDOTNET_RESULTS_FOUND }}
     steps:
       - name: Check out code
         uses: actions/checkout@v2
@@ -26,10 +31,9 @@ jobs:
           # Verificar se o PR foi encontrado
           if [[ $(echo "$pr_response" | jq 'length') -gt 0 ]]; then
             pr_url=$(echo "$pr_response" | jq -r '.[0].url')
-            echo "PR URL: $pr_url"
 
             labels=$(curl -s -H "Authorization: token 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" "$pr_url")
-            echo "$labels"
+
             if echo "$labels" | grep -F 'OrbitDotnet",'; then
                 echo "The label 'OrbitDotnet' was found."
                 echo "ORBITDOTNET_FOUND=true" >> $GITHUB_OUTPUT
@@ -46,5 +50,6 @@ jobs:
                 echo "ORBITDOTNET_RESULTS_FOUND=false" >> $GITHUB_OUTPUT
             fi
           else
-            echo "Deu ruim"
+            echo "ORBITDOTNET_FOUND=false" >> $GITHUB_OUTPUT
+            echo "ORBITDOTNET_RESULTS_FOUND=false" >> $GITHUB_OUTPUT
           fi

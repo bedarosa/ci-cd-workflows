@@ -4,13 +4,10 @@ on:
     pull_request: 
         types: [closed]
 
-  #Fazer a versão de PROD no próprio projeto de PROD eu dirias
   
 jobs:
     handle_label:
-      uses: ./.github/workflows/handle-label.yml
-      with:
-        labels: ${{ toJSON(github.event.pull_request.labels) }}
+      uses: ./.github/workflows/teste-main.yml
 
     push_OrbitDotnet:
       needs: [handle_label]
