@@ -13,6 +13,7 @@ jobs:
       uses: ./.github/workflows/labeler.yml
 
     handle_label:
+      needs: [labeler]
       uses: ./.github/workflows/teste-main.yml
 
     push_OrbitDotnet:
