@@ -2,7 +2,7 @@ name: Release Candidate Workflow
 
 on:
     pull_request: 
-        types: [closed]
+        types: [labeled]
 
   
 jobs:
