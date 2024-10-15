@@ -21,6 +21,7 @@ jobs:
       - name: Get the latest PR merged into main
         id: get_pr
         run: |
+          echo "Rodando"
           # Obter o commit SHA do push
           commit_sha="${{ github.sha }}"
           
