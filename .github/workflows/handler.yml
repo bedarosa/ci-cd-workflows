@@ -14,7 +14,9 @@ jobs:
 
     handle_label:
       needs: [labeler]
-      uses: ./.github/workflows/teste-main.yml
+      uses: ./.github/workflows/handle-label.yml
+      with:
+        labels: ${{ toJSON(github.event.pull_request.labels) }}
 
     push_OrbitDotnet:
       needs: [handle_label]
