@@ -2,7 +2,7 @@ name: "(internal) Pull Request Labeler"
 run-name: "(internal) Pull Request Labeler"
 
 on:
-  workflow_call:
+  pull_request:
     
 jobs:
   labeler:

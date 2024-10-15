@@ -1,53 +1,18 @@
 name: Release Candidate Workflow
 
 on:
-    pull_request: 
+  pull_request:
+     types: [labeled]
 
 permissions:
   contents: read
   pull-requests: write
 
 jobs:
-    
-    labeler:
-      permissions:
-        contents: read
-        pull-requests: write
-      runs-on: "ubuntu-latest"
-
-      steps:
-      - uses: actions/labeler@v5
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-
     handle_label:
-      needs: [labeler]
-      runs-on: ubuntu-latest
-      steps:
-        - name: Check out code
-          uses: actions/checkout@v2
-        - name: Check PR Labels
-          id: check_labels
-          run: |
-            labels="${{ toJSON(github.event.pull_request.labels) }}"
-            echo "Rótulos: $labels"
-
-            if echo "$labels" | grep -q OrbitDotnet,; then
-              echo "O rótulo 'OrbitDotnet' está presente."
-              echo "ORBITDOTNET_FOUND=true" >> $GITHUB_OUTPUT
-            else
-              echo "O rótulo 'orbitdotnet' NÃO está presente."
-              echo "ORBITDOTNET_FOUND=false" >> $GITHUB_OUTPUT
-            fi
-
-            if echo "$labels" | grep -q OrbitDotnet.Results,; then
-              echo "O rótulo 'results' está presente."
-              echo "ORBITDOTNET_RESULTS_FOUND=true" >> $GITHUB_OUTPUT
-            else
-              echo "O rótulo 'OrbitDotnet.Results' NÃO está presente."
-              echo "ORBITDOTNET_RESULTS_FOUND=false" >> $GITHUB_OUTPUT
-            fi
-  
+      uses: ./.github/workflows/handle-label.yml
+      with: 
+        labels: ${{ toJSON(github.event.pull_request.labels) }}
 
     push_OrbitDotnet:
       needs: [handle_label]
