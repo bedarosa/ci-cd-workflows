@@ -37,11 +37,19 @@ jobs:
           LABELS=$(echo "$LABELS_DATA" | jq -r '.[].name' | paste -sd "," -)
           echo "$LABELS"
           if echo "$LABELS" | grep -w "OrbitDotnet"; then
-            echo "Found label: OrbitDotnet"
+            echo "The label: OrbitDotnet was found"
+            echo "ORBITDOTNET_FOUND=true" >> $GITHUB_OUTPUT
+          else
+            echo "The label: OrbitDotnet was not found"
+            echo "ORBITDOTNET_FOUND=false" >> $GITHUB_OUTPUT
           fi
 
           if echo "$LABELS" | grep -w "OrbitDotnet.Results"; then
-            echo "Found label: OrbitDotnet.Results"
+            echo "The label: OrbitDotnet.Results was found"
+            echo "ORBITDOTNET_RESULTS_FOUND=true" >> $GITHUB_OUTPUT
+          else
+            echo "The label: OrbitDotnet.Results was not found"
+            echo "ORBITDOTNET_RESULTS_FOUND=false" >> $GITHUB_OUTPUT
           fi
 
 
