@@ -31,4 +31,11 @@ jobs:
 
           echo "$PR_NUMBER"
 
+          # Fetch the labels for the PR
+          LABELS_DATA=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          "https://api.github.com/repos/${{ github.repository }}/issues/$PR_NUMBER/labels")
+          LABELS=$(echo "$LABELS_DATA" | jq -r '.[].name')
+          echo "$LABELS"
+          
+
       
