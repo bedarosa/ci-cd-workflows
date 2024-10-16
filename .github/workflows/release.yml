@@ -15,7 +15,7 @@ jobs:
   build:
     needs: [handle_label]
     if: ${{ needs.handle_label.outputs.ORBITDOTNET_FOUND == 'true' || needs.handle_label.outputs.ORBITDOTNET_RESULTS_FOUND == 'true' }}
-    uses: peob/pmp-workflows/.github/workflows/build_dotnet.yml@main
+    uses: peob/pmp-workflows/.github/workflows/build_dotnet.yml
     secrets: inherit
           
   push_OrbitDotnet_Results:
