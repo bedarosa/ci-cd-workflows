@@ -34,8 +34,15 @@ jobs:
           # Fetch the labels for the PR
           LABELS_DATA=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
           "https://api.github.com/repos/${{ github.repository }}/issues/$PR_NUMBER/labels")
-          LABELS=$(echo "$LABELS_DATA" | jq -r '.[].name')
+          LABELS=$(echo "$LABELS_DATA" | jq -r '.[].name' | paste -sd "," -)
           echo "$LABELS"
-          
+          if echo "$LABELS" | grep -w "OrbitDotnet"; then
+            echo "Found label: OrbitDotnet"
+          fi
+
+          if echo "$LABELS" | grep -w "OrbitDotnet.Results"; then
+            echo "Found label: OrbitDotnet.Results"
+          fi
+
 
       
