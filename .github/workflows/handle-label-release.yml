@@ -11,7 +11,7 @@ on:
         
 jobs:
   get_labels_release:
-    runs-on: cawe-linux-x64-compute-medium
+    runs-on: ubuntu-latest
     outputs:
       ORBITDOTNET_FOUND: ${{ steps.get_labels_release.outputs.ORBITDOTNET_FOUND }}
       ORBITDOTNET_RESULTS_FOUND: ${{ steps.get_labels_release.outputs.ORBITDOTNET_RESULTS_FOUND }}
