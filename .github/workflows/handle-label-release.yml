@@ -34,23 +34,21 @@ jobs:
           # Fetch the labels for the PR
           LABELS_DATA=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
           "https://api.github.com/repos/${{ github.repository }}/issues/$PR_NUMBER/labels")
-          LABELS=$(echo "$LABELS_DATA" | jq -r '.[].name' | paste -sd "," -)
-          echo "$LABELS"
-          if echo "$LABELS" | grep -w "OrbitDotnet"; then
-            echo "The label: OrbitDotnet was found"
-            echo "ORBITDOTNET_FOUND=true" >> $GITHUB_OUTPUT
-          else
-            echo "The label: OrbitDotnet was not found"
-            echo "ORBITDOTNET_FOUND=false" >> $GITHUB_OUTPUT
-          fi
-
-          if echo "$LABELS" | grep -w "OrbitDotnet.Results"; then
-            echo "The label: OrbitDotnet.Results was found"
-            echo "ORBITDOTNET_RESULTS_FOUND=true" >> $GITHUB_OUTPUT
-          else
-            echo "The label: OrbitDotnet.Results was not found"
-            echo "ORBITDOTNET_RESULTS_FOUND=false" >> $GITHUB_OUTPUT
-          fi
-
-
-      
+          
+          echo "$LABELS_DATA" | jq -r '.[].name' | while read -r label; do
+            echo "Processing label: $label"
+            if [ "$label" = "OrbitDotnet" ]; then
+              echo "The label: OrbitDotnet was found"
+              echo "ORBITDOTNET_FOUND=true" >> $GITHUB_OUTPUT
+            else
+              echo "The label: OrbitDotnet was not found"
+              echo "ORBITDOTNET_FOUND=false" >> $GITHUB_OUTPUT
+            fi
+            if [ "$label" = "OrbitDotnet.Results" ]; then
+              echo "The label: OrbitDotnet.Results was found"
+              echo "ORBITDOTNET_RESULTS_FOUND=true" >> $GITHUB_OUTPUT
+            else
+              echo "The label: OrbitDotnet.Results was not found"
+              echo "ORBITDOTNET_RESULTS_FOUND=false" >> $GITHUB_OUTPUT
+            fi
+          done
