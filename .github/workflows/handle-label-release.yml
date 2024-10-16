@@ -29,8 +29,8 @@ jobs:
       - name: Get the latest commit SHA
         id: get_labels_release
         run: |
-          PR_NUMBER=$(gh pr list --head "${{ github.ref }}" --json number --jq '.[0].number')
-          echo "PR_NUMBER=$PR_NUMBER" >> $GITHUB_ENV
+          # Use the current commit SHA to find the associated PR
+          PR_NUMBER=$(gh pr list --search ${{ github.sha }} --json number --jq '.[0].number')
           echo "$PR_NUMBER"
 
           LABELS=$(gh pr view $PR_NUMBER --json labels --jq '.labels[].name')
