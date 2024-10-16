@@ -15,7 +15,7 @@ jobs:
   build:
     needs: [handle_label]
     if: ${{ needs.handle_label.outputs.ORBITDOTNET_FOUND == 'true' || needs.handle_label.outputs.ORBITDOTNET_RESULTS_FOUND == 'true' }}
-    uses: ./.github/workflows/build_dotnet.yml
+    uses: ./.github/workflows/pack_and_push.yml
     secrets: inherit
           
   push_OrbitDotnet_Results:
