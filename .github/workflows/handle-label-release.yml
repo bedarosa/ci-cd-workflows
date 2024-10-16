@@ -31,13 +31,13 @@ jobs:
         run: |
           echo "COMMIT_SHA=$(git rev-parse HEAD)" >> $GITHUB_ENV
           pr=$(gh pr list --search "${{ env.COMMIT_SHA }}" --json number --jq '.[0].number')
-          echo "$pr"
  
           if [ -z "$pr" ]; then
             echo "No PR found for commit ${{ env.COMMIT_SHA }}"
           else
             echo "PR Number: $pr"
             pr_view=$(gh pr view $pr --json labels)
+            echo "$pr_view"
 
             if echo "$pr_view" | grep -q "OrbitDotnet"; then
               echo "The label 'OrbitDotnet' was found."
