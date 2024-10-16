@@ -56,36 +56,4 @@ jobs:
             fi
           fi
 
-      - name: Find Pull Request associated with the commit
-        id: find_pr
-        run: |
-          pr=$(gh pr list --search "${{ env.COMMIT_SHA }}" --json number --jq '.[0].number')
-          if [ -z "$pr" ]; then
-            echo "No PR found for commit ${{ env.COMMIT_SHA }}"
-          else
-            echo "PR Number: $pr"
-            echo "PR_NUMBER=$pr" >> $GITHUB_ENV  # Salvar o número do PR como uma variável de ambiente
-          fi
-
-      - name: Output PR Number
-        run: |
-          echo "The associated PR number is ${{ env.PR_NUMBER }}"
-          # run: |
-          #   # Obter o commit SHA do push
-          #   commit_sha="${{ github.sha }}"
-          
-        #   # Usar a API do GitHub para encontrar o PR associado ao commit
-        #   pr_response=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-        #     "https://api.github.com/repos/${{ secrets.GITHUB_TOKEN }}/commits/${commit_sha}/pulls")
-
-        #   echo "$pr_response"
-
-        #   # Verificar se o PR foi encontrado
-        #   if [[ $(echo "$pr_response" | jq 'length') -gt 0 ]]; then
-        #     pr_url=$(echo "$pr_response" | jq -r '.[0].url')
-
-        #     labels=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" "$pr_url")
-
-        #     if echo "$labels" | grep -F 'OrbitDotnet",'; then
-        #         echo "The label 'OrbitDotnet' was found."
-        #         echo "ORBITDOTNET_FOUND=true" >> $GITHUB_OUTPUT
+      
