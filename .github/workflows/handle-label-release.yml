@@ -36,6 +36,7 @@ jobs:
 
 
           echo "$PR_RESPONSE"
-
+          PR_NUMBER=$(echo "$PR_RESPONSE" | jq -r '.[0].number')
+          echo "$PR_NUMBER"
           pr_view=$(gh pr view $PR_NUMBER)
           echo "$pr_view"
