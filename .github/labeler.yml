@@ -1,6 +1,6 @@
 OrbitDotnet:
 - changed-files:
-  - any-glob-to-any-file: ['Dotnet.TestApp/**/*']
+  - all-globs-to-all-files: ['Dotnet.TestApp/**/*']
 
 OrbitDotnet.Results:
 - changed-files:
