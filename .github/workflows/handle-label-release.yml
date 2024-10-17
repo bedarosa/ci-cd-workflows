@@ -31,6 +31,7 @@ jobs:
       - name: Get PR Number
         run: |
           # Use GitHub CLI to find the PR associated with the commit
+          echo "${{ github.sha }}"
           PR_NUMBER=$(gh pr list --search "${{ github.sha }}" --json number --jq '.[0].number')
 
           echo "$PR_NUMBER"
