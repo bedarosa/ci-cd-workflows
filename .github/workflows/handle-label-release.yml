@@ -28,6 +28,8 @@ jobs:
         run: |
           echo ${{ secrets.GITHUB_TOKEN }} | gh auth login --with-token
 
+      - name: Get PR Number
+        run: |
           # Use GitHub CLI to find the PR associated with the commit
           PR_NUMBER=$(gh pr list --search "${{ github.sha }}" --json number --jq '.[0].number')
 
