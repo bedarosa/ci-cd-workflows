@@ -35,5 +35,7 @@ jobs:
             -H "Accept: application/vnd.github.groot-preview+json")
 
           PR_NUMBER=$(echo "$PR_RESPONSE" | jq -r '.[0].number')
-          echo "$PR_RESPONSE"
           echo "$PR_NUMBER"
+
+          pr_view=$(gh pr view $PR_NUMBER)
+          echo "$pr_view"
