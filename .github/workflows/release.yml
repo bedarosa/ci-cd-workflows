@@ -26,3 +26,12 @@ jobs:
       ORBITDOTNET_FOUND: ${{ needs.handle_label.outputs.ORBITDOTNET_FOUND }}
       ORBITDOTNET_RESULTS_FOUND: ${{ needs.handle_label.outputs.ORBITDOTNET_RESULTS_FOUND }}
     secrets: inherit
+
+  push_OrbitDotnet:
+    needs: [handle_label]
+    if: ${{needs.handle_label.outputs.ORBITDOTNET_FOUND == 'true' }}
+    uses: ./.github/workflows/pack_and_push.yml
+    with:
+      ORBITDOTNET_FOUND: ${{ needs.handle_label.outputs.ORBITDOTNET_FOUND }}
+      ORBITDOTNET_RESULTS_FOUND: ${{ needs.handle_label.outputs.ORBITDOTNET_RESULTS_FOUND }}
+    secrets: inherit

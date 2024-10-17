@@ -35,20 +35,22 @@ jobs:
           LABELS_DATA=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
           "https://api.github.com/repos/${{ github.repository }}/issues/$PR_NUMBER/labels")
           
-          echo "$LABELS_DATA" | jq -r '.[].name' | while read -r label; do
-            echo "Processing label: $label"
-            if [ "$label" = "OrbitDotnet" ]; then
-              echo "The label: OrbitDotnet was found"
-              echo "ORBITDOTNET_FOUND=true" >> $GITHUB_OUTPUT
-            else
-              echo "The label: OrbitDotnet was not found"
-              echo "ORBITDOTNET_FOUND=false" >> $GITHUB_OUTPUT
-            fi
-            if [ "$label" = "OrbitDotnet.Results" ]; then
-              echo "The label: OrbitDotnet.Results was found"
-              echo "ORBITDOTNET_RESULTS_FOUND=true" >> $GITHUB_OUTPUT
-            else
-              echo "The label: OrbitDotnet.Results was not found"
-              echo "ORBITDOTNET_RESULTS_FOUND=false" >> $GITHUB_OUTPUT
-            fi
-          done
+          ORBITDOTNET_FOUND=$(echo "$LABELS_DATA" | jq -r '.[] | select(.name == "OrbitDotnet")')
+          if [ -n "$ORBITDOTNET_FOUND" ]; then
+            echo "The label 'OrbitDotnet' was found."
+            echo "ORBITDOTNET_FOUND=true" >> $GITHUB_OUTPUT
+          else
+            echo "The label 'OrbitDotnet' was not found."
+            echo "ORBITDOTNET_FOUND=false" >> $GITHUB_OUTPUT
+          fi
+
+          # Check for the 'OrbitDotnet.Results' label
+          ORBITDOTNET_RESULTS_FOUND=$(echo "$LABELS_DATA" | jq -r '.[] | select(.name == "OrbitDotnet.Results")')
+          if [ -n "$ORBITDOTNET_RESULTS_FOUND" ]; then
+            echo "The label 'OrbitDotnet.Results' was found."
+            echo "ORBITDOTNET_RESULTS_FOUND=true" >> $GITHUB_OUTPUT
+          else
+            echo "The label 'OrbitDotnet.Results' was not found."
+            echo "ORBITDOTNET_RESULTS_FOUND=false" >> $GITHUB_OUTPUT
+          fi
+
