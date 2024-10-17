@@ -38,5 +38,25 @@ jobs:
           echo "$PR_RESPONSE"
           PR_NUMBER=$(echo "$PR_RESPONSE" | jq -r '.[0].number')
           echo "$PR_NUMBER"
-          pr_view=$(gh pr view $PR_NUMBER)
+          
+          pr_view=$(gh pr view $PR_NUMBER --json labels)
           echo "$pr_view"
+
+          ORBITDOTNET_FOUND=$(echo "$pr_view" | jq -r '.labels[] | select(.name == "OrbitDotnet")')
+          ORBITDOTNET_RESULTS_FOUND=$(echo "$pr_view" | jq -r '.labels[] | select(.name == "OrbitDotnet.Results")')
+
+          if [ -n "$ORBITDOTNET_FOUND" ]; then
+              echo "The label 'OrbitDotnet' was found."
+              echo "ORBITDOTNET_FOUND=true" >> $GITHUB_OUTPUT
+          else
+              echo "The label 'OrbitDotnet' was not found."
+              echo "ORBITDOTNET_FOUND=false" >> $GITHUB_OUTPUT
+          fi
+
+          if [ -n "$ORBITDOTNET_RESULTS_FOUND" ]; then
+              echo "The label 'OrbitDotnet.Results' was found."
+              echo "ORBITDOTNET_RESULTS_FOUND=true" >> $GITHUB_OUTPUT
+          else
+              echo "The label 'OrbitDotnet.Results' was not found."
+              echo "ORBITDOTNET_RESULTS_FOUND=false" >> $GITHUB_OUTPUT
+          fi
