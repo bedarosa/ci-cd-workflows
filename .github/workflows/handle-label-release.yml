@@ -32,7 +32,8 @@ jobs:
         run: |
           echo "${{github.event.before}}"
           # Use GitHub CLI to find the PR associated with the commit
-          PR_NUMBER=$(gh pr list --base main --state merged --limit 1 --json number --jq '.[0].number')
+          PR_NUMBER=$(gh pr list --state merged --json number,commits --jq '.[] | select(.commits[].oid == "'${{ github.sha }}'") | .number')
+
 
 
           echo "$PR_NUMBER"
