@@ -36,7 +36,6 @@ jobs:
 
 
           echo "$PR_RESPONSE"
-          echo "$PR_NUMBER"
 
           pr_view=$(gh pr view $PR_NUMBER)
           echo "$pr_view"
