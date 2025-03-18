@@ -1,4 +1,4 @@
-name: Release Workflow
+name: Deploy Dev Teste
 
 on:
   push: 
@@ -8,30 +8,21 @@ on:
 permissions: write-all
       
 jobs:
-
-  handle_label: 
-    uses: ./.github/workflows/handle-label-release.yml
-
   build:
-    needs: [handle_label]
-    if: ${{ needs.handle_label.outputs.ORBITDOTNET_FOUND == 'true' || needs.handle_label.outputs.ORBITDOTNET_RESULTS_FOUND == 'true' }}
-    uses: ./.github/workflows/pack_and_push.yml
-    secrets: inherit
-          
-  push_OrbitDotnet_Results:
-    needs: [handle_label]
-    if: ${{needs.handle_label.outputs.ORBITDOTNET_RESULTS_FOUND == 'true' }}
-    uses: ./.github/workflows/pack_and_push.yml
-    with:
-      ORBITDOTNET_FOUND: ${{ needs.handle_label.outputs.ORBITDOTNET_FOUND }}
-      ORBITDOTNET_RESULTS_FOUND: ${{ needs.handle_label.outputs.ORBITDOTNET_RESULTS_FOUND }}
-    secrets: inherit
+    name: Build & Deploy
+    runs-on: ubuntu-latest
 
-  push_OrbitDotnet:
-    needs: [handle_label]
-    if: ${{needs.handle_label.outputs.ORBITDOTNET_FOUND == 'true' }}
-    uses: ./.github/workflows/pack_and_push.yml
-    with:
-      ORBITDOTNET_FOUND: ${{ needs.handle_label.outputs.ORBITDOTNET_FOUND }}
-      ORBITDOTNET_RESULTS_FOUND: ${{ needs.handle_label.outputs.ORBITDOTNET_RESULTS_FOUND }}
-    secrets: inherit
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Image number
+        run: |
+          OFFSET=64
+          TAG_NUMBER="$(( ${{ github.run_number }} + OFFSET ))"
+          echo "$TAG_NUMBER"
+          echo "TAG_NUMBER=$TAG_NUMBER" >> GITHUB_ENV
+
+      - name: Build and Push Docker Images for Each App
+        run: |
+          echo "${{ env.TAG_NUMBER }}"
