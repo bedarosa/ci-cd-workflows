@@ -19,9 +19,8 @@ jobs:
       - name: Image number
         run: |
           OFFSET=64
-          TAG_NUMBER="$(( ${{ github.run_number }} + OFFSET ))"
-          echo "$TAG_NUMBER"
-          echo "TAG_NUMBER=$TAG_NUMBER" >> GITHUB_ENV
+          TAG_NUMBER=$(( GITHUB_RUN_NUMBER + OFFSET ))
+          echo "TAG_NUMBER=$TAG_NUMBER" >> $GITHUB_ENV
 
       - name: Build and Push Docker Images for Each App
         run: |
